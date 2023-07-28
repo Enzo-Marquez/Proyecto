@@ -12,6 +12,7 @@ $conex = mysqli_connect("localhost","root","","proyecto_db");
 
 
 
+
 $carrera = $_POST['carrera'];
 //$anio = $_POST['anio'];
 

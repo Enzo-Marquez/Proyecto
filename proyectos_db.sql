@@ -19,10 +19,10 @@ USE `proyecto_db`;
 
 -- Volcando estructura para tabla proyecto_db.carreras
 CREATE TABLE IF NOT EXISTS `carreras` (
-  `id_carreras` int(11) NOT NULL,
+  `id_carreras` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_carreras`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla proyecto_db.carreras: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `carreras` DISABLE KEYS */;
@@ -46,13 +46,14 @@ CREATE TABLE IF NOT EXISTS `examenes` (
   `vocal_1` varchar(50) NOT NULL DEFAULT '',
   `vocal_2` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_examenes`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyecto_db.examenes: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_db.examenes: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `examenes` DISABLE KEYS */;
 INSERT INTO `examenes` (`id_examenes`, `carrera`, `anio`, `espacio_curricular`, `llamado_1`, `llamado_2`, `hora`, `presidente`, `vocal_1`, `vocal_2`) VALUES
-	(92, 1, 1, 1, '2023-04-12', '2023-04-05', '01:18:00', 'Moschen Silvio', 'Fontana Claudia', 'Roelschin Sebastian'),
-	(93, 2, 2, 28, '2023-04-24', '2023-04-19', '03:19:00', 'asdasd', 'rewe', 'dasads');
+	(110, 2, 2, 27, '2023-05-16', '2023-05-11', '18:17:00', 'asddas', 'asdasd', 'asddas'),
+	(115, 2, 2, 28, '2023-05-17', '2023-05-17', '20:58:00', 'asd', 'asdasd', 'asdasd'),
+	(116, 1, 2, 14, '2023-05-16', '2023-05-15', '21:09:00', 'asddas', 'rewe', 'adsdas');
 /*!40000 ALTER TABLE `examenes` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto_db.inscripcion_alumno
@@ -64,12 +65,12 @@ CREATE TABLE IF NOT EXISTS `inscripcion_alumno` (
   `anio_regular` year(4) NOT NULL DEFAULT 2000,
   `llamado` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_inscripcion_alumno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla proyecto_db.inscripcion_alumno: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `inscripcion_alumno` DISABLE KEYS */;
 INSERT INTO `inscripcion_alumno` (`id_inscripcion_alumno`, `id_alumno`, `id_examen`, `condicion`, `anio_regular`, `llamado`) VALUES
-	(110, 34, 84, 'Alunmno Libre', '2023', 'Segundo Llamado');
+	(124, 41, 116, 'Alumno Regular', '2021', 'Ambos Llamados');
 /*!40000 ALTER TABLE `inscripcion_alumno` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto_db.inscriptos
@@ -224,12 +225,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `celular` varchar(10) DEFAULT NULL,
   `correo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyecto_db.usuarios: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_db.usuarios: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `username`, `pass`, `nombre`, `apellido`, `fk_rol`, `carrera`, `celular`, `correo`) VALUES
-	(34, '41403362', '123', 'Enzo', 'Marquez', 0, 1, '3482647506', 'enzomarquez42@gmail.com');
+	(41, '41403362', '123', 'Enzo', 'Marquez', 0, 1, '3482647506', 'enzomarquez42@gmail.com'),
+	(44, '41225399', '123', 'Leandro', 'Salaz', 1, 2, '3482554488', 'leandrosalaz@gmail.com'),
+	(45, '42927992', '123', 'Javier', 'Raffin', 0, 1, '3482445566', 'esc.javierraffin@gmail.com'),
+	(46, '123123', '123', 'fff', 'awdas', 1, 2, '3482123213', 'asdasdas@gmail.com');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

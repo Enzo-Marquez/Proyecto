@@ -233,7 +233,8 @@ $botonEdit = 'editar'. $mostrar['id_examenes'];
 ?>
 <div>
    <form  method="post">
-   <p>Seleccionar Carrera</p>         
+   <p>Seleccionar Carrera</p>     
+   <input style="display:none;" name="idExamen" type="text" value="<?php echo $mostrar['id_examenes'] ?>">    
   <select name="carreraa" class="form-control form-control-sm">
     <option value="<?php echo $mostrar['carrera']; ?>"><?php echo $mostrar['carrera']; ?></option>
 
@@ -586,6 +587,14 @@ echo"Error en la linea sql";
   //   $('#vocal_2').val(datos[8]);
 
   // });
+
+
+
+
+
+  // https://ejemplo.com/ruta?variable1=valor1&variable2=valor2
+  // data:"carrera=" + $('#carrera').val() + "&variable2=" + $('#idExaem').val(),
+
 </script>
 
 
@@ -629,4 +638,3 @@ echo"Error en la linea sql";
 		});
 	}
 </script>
-
