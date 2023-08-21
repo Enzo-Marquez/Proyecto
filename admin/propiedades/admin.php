@@ -3,22 +3,25 @@
 
 session_start();
 error_reporting(0);
-$varsesion= $_SESSION['user'];
-if($varsesion== null || $varsesion=''){
-    header("location: index.php");
-    die();
+$varsesion = $_SESSION['user'];
+if ($varsesion == null || $varsesion == '') {
+  header("location: ../../index.php");
+  die();
 }
 
 
+
 $var= $_SESSION['user'];
+
    $conex = mysqli_connect("localhost","root","","proyecto_db");
-        $asd = $conex->query( "SELECT id, nombre from usuarios where username='$var'");
+        $asd = $conex->query( "SELECT id, nombre, fk_rol from usuarios where username='$var'");
         while($rowens = $asd->fetch_array()){ 
         //echo '<h1>'.$rowens['fk_rol'].'</h1>';
         $cateUser = $rowens['fk_rol'];
         //$sectorId = $rowens['id'];
              }
 
+             
 
              
 ?>
@@ -57,13 +60,10 @@ $var= $_SESSION['user'];
     ?>
                 <nav class="navegacion">
                     <?php
-                     if($cateUser == 1){
-                        ?> 
-                         
-                         <a class="navegacion__enlace" href="admin/propiedades/admincarreras.php">Administrador</a>
-
-                        <?php
-                      } 
+                     if($cateUser != 0){
+                        header("location: ../../carreras.php");
+                        die();
+                      }
                      ?> 
                     <a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a>  
                     <a class="navegacion__enlace" href="admincarreras.php">Mesas de Examenes</a>

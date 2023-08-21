@@ -64,15 +64,17 @@ $var= $_SESSION['user'];
 </header>
 
 <nav class="navegacion">
-  <?php
-    if($cateUser == 0){
-    ?> 
-                         
-    <a class="navegacion__enlace" href="admin/propiedades/admin.php">Administrador</a>
 
-  <?php
-   } 
-   ?> 
+<?php
+                     if($cateUser == 0){
+                        ?> 
+                         
+                         <a class="navegacion__enlace" href="admin/propiedades/admincarreras.php">Administrador</a>
+
+                        <?php
+                     
+                      }
+                     ?> 
                     
   <a class="navegacion__enlace navegacion__enlace--activo" href="carreras.php">Mesas de Examenes</a>
   <a class="navegacion__enlace" href="informacion.php">Informacion</a>
@@ -175,7 +177,7 @@ $var= $_SESSION['user'];
 <head>
     <title>Botón Mostrar/Ocultar</title>
     <style>
-        #terms {
+        #terminos {
             display: none;
         }
 
@@ -195,7 +197,7 @@ $var= $_SESSION['user'];
 </head>
 <body>
     <button id="toggleButton" onclick="toggleTerms()">Mostrar/Ocultar Términos y Condiciones</button>
-    <div id="terms">
+    <div id="terminos">
     <br>
     
 <h1>TERMINOS Y CONDICIONES PARA RENDIR UNA ASIGNATURA</h1>
@@ -223,7 +225,7 @@ $var= $_SESSION['user'];
 
 <script>
         function toggleTerms() {
-            var termsDiv = document.getElementById("terms");
+            var termsDiv = document.getElementById("terminos");
             if (termsDiv.style.display === "none") {
                 termsDiv.style.display = "block";
             } else {
@@ -347,7 +349,7 @@ $var= $_SESSION['user'];
         </select>
         <br>
 
-        <label for="terms">
+      <label for="terms">
       <input type="checkbox" id="terms" required> 
       Confirmo que he leído los términos y condiciones estipulados por la institución y que acepto cumplir con los mismos. Además, certifico que los datos proporcionados en este formulario son precisos y correctos.
     </label>
@@ -355,7 +357,8 @@ $var= $_SESSION['user'];
       
 
 <div>
-<input type="submit" class="asign1" name="<?php echo $btnsend; ?>"  value="Enviar Inscripcion">     
+
+<input type="submit" class="asign1" name="<?php echo $btnsend; ?>"  value="Enviar Inscripcion">
 </div>
 
 

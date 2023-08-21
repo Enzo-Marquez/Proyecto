@@ -3,21 +3,28 @@
 session_start();
 error_reporting(0);
 $varsesion = $_SESSION['user'];
-if ($varsesion == null || $varsesion = '') {
-  header("location: index.php");
+if ($varsesion == null || $varsesion == '') {
+  header("location: ../../index.php");
   die();
 }
 
 
+                    
+
+
 $var = $_SESSION['user'];
 $conex = mysqli_connect("localhost", "root", "", "proyecto_db");
-$asd = $conex->query("SELECT id, nombre, carrera from usuarios where username='$var'");
+$asd = $conex->query("SELECT id, nombre, carrera, fk_rol from usuarios where username='$var'");
 while ($rowens = $asd->fetch_array()) {
   $idalumno = $rowens['id'];
   $carreraalumno = $rowens['carrera'];
   $cateUser = $rowens['fk_rol'];
 }
 
+if($cateUser > 0){
+  header("location: ../../carreras.php");
+  die();
+}
 
 
 ?>
@@ -66,15 +73,7 @@ while ($rowens = $asd->fetch_array()) {
 
   ?>
   <nav class="navegacion">
-    <?php
-    if ($cateUser == 1) {
-    ?>
-
-      <a class="navegacion__enlace" href="admin/propiedades/admincarreras.php">Administrador</a>
-
-    <?php
-    }
-    ?>
+  
     <a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a>
     <a class="navegacion__enlace navegacion__enlace--activo" href="admincarreras.php">Mesas de Examenes</a>
     <a class="navegacion__enlace" href="admininscriptos.php">Inscriptos</a>
@@ -138,21 +137,23 @@ while ($rowens = $asd->fetch_array()) {
 
           $carr = $_POST['carr'];
 
-          $sql = "SELECT e.id_examenes, c.nombre as carrera, anio, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
+          $sql = "SELECT e.id_examenes,c.id_carreras, c.nombre as carrera, anio, desc_anios, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
 llamado_1 as llamado1, llamado_2 as llamado2,
 DATE_FORMAT( llamado_2 ,  '%d-%m-%Y' ) AS llamado_2, hora, presidente, vocal_1, vocal_2
 from examenes e 
 LEFT JOIN mat m ON m.id_mat = e.espacio_curricular
 LEFT JOIN carreras c ON c.id_carreras = e.carrera
+LEFT JOIN anios ON id_anios = anio
 where carrera = '$carr' ";
         } else {
 
-          $sql = "SELECT e.id_examenes, c.nombre as carrera, anio, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
+          $sql = "SELECT e.id_examenes,c.id_carreras, c.nombre as carrera, anio, desc_anios, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
 llamado_1 as llamado1, llamado_2 as llamado2,
 DATE_FORMAT( llamado_2 ,  '%d-%m-%Y' ) AS llamado_2, hora, presidente, vocal_1, vocal_2
 from examenes e
 LEFT JOIN mat m ON m.id_mat = e.espacio_curricular
-LEFT JOIN carreras c ON c.id_carreras = e.carrera";
+LEFT JOIN carreras c ON c.id_carreras = e.carrera
+LEFT JOIN anios ON id_anios = anio";
         }
 
         $result = mysqli_query($conex, $sql);
@@ -231,42 +232,100 @@ LEFT JOIN carreras c ON c.id_carreras = e.carrera";
                   <div>
                     <form method="post">
                       <p>Seleccionar Carrera</p>
-                      <input style="display:none;" name="idExamen" type="text" value="<?php echo $mostrar['id_examenes'] ?>">
-                      <select name="carreraa" class="form-control form-control-sm">
-                        <option value="<?php echo $mostrar['carrera']; ?>"><?php echo $mostrar['carrera']; ?></option>
-
+                      <input style="display:none;" id="idExamena" name="idExamen" type="text" value="<?php echo $mostrar['id_examenes'] ?>">
+                      <select id="carreraas" name="carreraa" class="form-control form-control-sm">
+                        <option value="<?php echo $mostrar['id_carreras']; ?>" selected><?php echo $mostrar['carrera']; ?></option>
+                        
                         <?php
+                        $carreraElegida = $mostrar['id_carreras'];
                         $consu = "SELECT * FROM carreras";
                         $ejecutarconsu = mysqli_query($conex, $consu);
                         while ($consu2 = mysqli_fetch_assoc($ejecutarconsu)) {
+                          $opcion = $consu2['id_carreras'];
+                          if($opcion != $carreraElegida){
                         ?>
                           <option value="<?php echo $consu2['id_carreras']; ?>"><?php echo $consu2['nombre']; ?></option>
                         <?php
+                        }
                         }
                         ?>
                       </select>
                       <br>
 
+                      
+
 
 
                       <div>
 
+                      
                         <br>
                         <label align="left">Seleccionar Año de la Carrera</label>
                         <select id="anioa" name="anioa" class="form-control form-control-sm">
-                          <option value="<?php echo $mostrar['anio']; ?>"><?php echo $mostrar['anio']; ?></option>
-                          <option value="1">Primero</option>
-                          <option value="2">Segundo</option>
-                          <option value="3">Tercero</option>
+                          <option selected value="<?php echo $mostrar['anio']; ?>"><?php echo $mostrar['desc_anios']; ?></option>
+                          <?php
+                          $carreraElegida2 = $mostrar['anio'];
+                          $anio = 'SELECT * from anios';
+                          $queryanio = mysqli_query($conex, $anio);
+                        while ($anios = mysqli_fetch_assoc($queryanio)) {
+                          $opcion2 = $anios['id_anios'];
+                          if($opcion2 != $carreraElegida2){
+                          ?>
+                          <option value="<?php echo $anios['id_anios']; ?>"><?php echo $anios['desc_anios']; ?></option>
+                          <?php
+                        }
+                      }
+                          ?>
 
                         </select>
                       </div>
                       <br>
 
                       <div>
-                        <label align="left">Espacio Curricular</label>
-                        <input class="form-control form-control-sm" id="espacio_curricular" name="espacio_curriculara" placeholder="Espacio Curricular" value="<?php //echo $mostrar['select2lista']; 
-                                                                                                                                                                ?>" required>
+
+                         <script type="text/javascript">
+                          $(document).ready(function() {
+                            $('#carreraas').val();
+                            recargarLista2();
+
+                            $('#carreraas').change(function() {
+                              recargarLista2();
+                            });
+                          })
+
+                          $(document).ready(function() {
+                            $('#anioa').val();
+                            recargarLista2();
+
+                            $('#anioa').change(function() {
+                              recargarLista2();
+                            });
+                          })
+                        </script>
+
+                        <script type="text/javascript">
+                          function recargarLista2() {
+                            $.ajax({
+                              type: "POST",
+                              url: "filtro2.php",
+                              data: "carreraa=" + $('#carreraas').val() + "&anioa=" + $('#anioa').val() + "&idExamena=" + $('#idExamena').val(),
+                              
+                              success: function(g) {
+                                $('#select3lista').html(g);
+                              }
+                            });
+                          }
+                        </script>
+
+
+
+
+
+                        <label>Espacio Curricular</label>
+                        <div id="select3lista"></div>
+
+
+
                       </div>
 
                       <div>
@@ -497,6 +556,15 @@ LEFT JOIN carreras c ON c.id_carreras = e.carrera";
                     recargarLista();
                   });
                 })
+
+                $(document).ready(function() {
+                  $('#anio').val(0);
+                  recargarLista();
+
+                  $('#anio').change(function() {
+                    recargarLista();
+                  });
+                })
               </script>
 
               <script type="text/javascript">
@@ -504,7 +572,7 @@ LEFT JOIN carreras c ON c.id_carreras = e.carrera";
                   $.ajax({
                     type: "POST",
                     url: "filtro.php",
-                    data: "carrera=" + $('#carrera').val(),
+                    data: "carrera=" + $('#carrera').val() + "&anio=" + $('#anio').val(),
                     success: function(r) {
                       $('#select2lista').html(r);
                     }

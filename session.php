@@ -58,7 +58,7 @@ if(isset($_SESSION['user'])){
                     function contador(){
                         document.getElementById('tiempo').innerHTML = "INGRESANDO...";
                         if(segundos == 0){
-                            location.href="carreras.php";
+                            location.href="./admin/propiedades/admincarreras.php";
                         }else{
                             segundos--;
                             setTimeout("contador()",1000);

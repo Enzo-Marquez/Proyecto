@@ -25,7 +25,7 @@
         <label for="password">Contraseña</label>
         <input id="typePasswordX" name="pass" type="password" placeholder="Ingrese su contraseña" required/>
         <input type="submit" value="Ingresar">
-		<input type="submit" onclick="location='index.php'"value="volver">
+		    <input type="button" onclick="location='index.php'"value="volver">
       </form>
     </div>
   </body>

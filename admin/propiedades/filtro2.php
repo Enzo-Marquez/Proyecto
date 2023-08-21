@@ -1,42 +1,36 @@
-
-
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#controlBuscador4<?php echo $id_examen; ?>').select2({
+			dropdownParent: $("#editar<?php echo $id_examen; ?>")
+		});
+	});
+</script>
 
 <?php
+// Permitir cualquier origen
+header("Access-Control-Allow-Origin: *");
 
-$conex = mysqli_connect("localhost","root","","proyecto_db");
+$conex = mysqli_connect("localhost", "root", "", "proyecto_db");
 
-
-$id_examen = $_POST['idExamen'];
+$id_examen = $_POST['idExamena'];
 $carreraa = $_POST['carreraa'];
-//$anio = $_POST['anio'];
+$anioa = $_POST['anioa'];
 
-$sql00="SELECT * from mat where carrera_mat = '$carreraa'";
-$result00=mysqli_query($conex,$sql00);
-
+$sql3 = "SELECT * FROM mat WHERE carrera_mat = '$carreraa' AND anio_mat = '$anioa'";
+$result00 = mysqli_query($conex, $sql3);
 ?>
 
-<script type="text/javascript">
-			$(document).ready(function(){
-				$('#controlBuscador<?php echo $id_examen; ?>').select2({
-                    dropdownParent: $("editar<?php echo $id_examen; ?>")
-                });
-			});
-			</script>
-
 <section style="text-align: center;">
-        
-						<select id="controlBuscador<?php echo $id_examen; ?>" name="espacio_curricular">
-							
-							<?php 
-              
+	<select id="controlBuscador4<?php echo $id_examen; ?>" class="form-control form-control-sm" name="espacio_curricular">
 
-          while ($ver00=mysqli_fetch_row($result00)) { ?>
-
-							<option value="<?php echo $ver00[0] ?>">
-								<?php echo $ver00[1] ?>
-							</option>
-
-							<?php  }?>
-						</select>
-					</section>
+		<?php
+		while ($ver3 = mysqli_fetch_row($result00)) {
+		?>
+			<option value="<?php echo $ver3[0]; ?>">
+				<?php echo $ver3[1]; ?>
+			</option>
+		<?php
+		}
+		?>
+	</select>
+</section>

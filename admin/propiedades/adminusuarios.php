@@ -12,14 +12,18 @@ if($varsesion== null || $varsesion=''){
 
 $var= $_SESSION['user'];
    $conex = mysqli_connect("localhost","root","","proyecto_db");
-        $asd = $conex->query( "SELECT id, nombre from usuarios where username='$var'");
+        $asd = $conex->query( "SELECT id, nombre, fk_rol from usuarios where username='$var'");
         while($rowens = $asd->fetch_array()){ 
         //echo '<h1>'.$rowens['fk_rol'].'</h1>';
         $cateUser = $rowens['fk_rol'];
         //$sectorId = $rowens['id'];
              }
 
-
+             if($cateUser > 0){
+              header("location: ../../carreras.php");
+              die();
+            }
+            
              
 ?>
 
@@ -115,11 +119,11 @@ $enlace = mysqli_connect($servidor,$usuario,$clave,$baseDeDatos);
 
 
 
-$sql="SELECT u.username, u.pass, u.nombre, u.apellido, 
-CASE WHEN u.fk_rol = 0 THEN 'Administrador' ELSE 'Alumno' END AS Rol,
+$sql="SELECT u.id, u.username, u.pass, u.nombre, u.apellido, u.fk_rol,id_roles,desc_roles,id_carreras,
 c.nombre AS nombre_carrera, u.celular, u.correo
 FROM usuarios u
-JOIN carreras c ON u.carrera = c.id_carreras;";
+LEFT JOIN roles on id_roles = u.fk_rol
+LEFT JOIN carreras c ON c.id_carreras = u.carrera;";
 $result=mysqli_query($enlace,$sql);
 
 while($mostrar=mysqli_fetch_array($result)){
@@ -137,7 +141,7 @@ while($mostrar=mysqli_fetch_array($result)){
   <td><?php echo $mostrar['pass']?></td>
   <td><?php echo $mostrar['nombre']?></td>
   <td><?php echo $mostrar['apellido']?></td>
-  <td><?php echo $mostrar['Rol']?></td>
+  <td><?php echo $mostrar['desc_roles']?></td>
   <td><?php echo $mostrar['nombre_carrera']?></td>
 
 
@@ -253,9 +257,20 @@ $botonEditusuarios = 'editar'. $mostrar['id'];
         <br>
         <p>Seleccionar Rol</p>  
         <select name="fk_rola" class="form-control form-control-sm">
-                      <option value="<?php echo $mostrar['fk_rol'];?>">Seleccionar Rol</option>
-                      <option value="0">Administrador</option>
-                      <option value="1">Alumno</option>
+                      <option value="<?php echo $mostrar['fk_rol'];?>"><?php echo $mostrar['desc_roles'];?></option>
+                      <?php
+                        $carreraElegida = $mostrar['fk_rol'];
+                        $consu = "SELECT * FROM roles";
+                        $ejecutarconsu = mysqli_query($conex, $consu);
+                        while ($consu2 = mysqli_fetch_assoc($ejecutarconsu)) {
+                          $opcion = $consu2['id_roles'];
+                          if($opcion != $carreraElegida){
+                        ?>
+                          <option value="<?php echo $consu2['id_roles']; ?>"><?php echo $consu2['desc_roles']; ?></option>
+                        <?php
+                        }
+                        }
+                        ?>
         </select>
         </div>
         <br>
@@ -267,16 +282,20 @@ $botonEditusuarios = 'editar'. $mostrar['id'];
            
       <p>Seleccionar Carrera</p>          
   <select name="carreraa" class="form-control form-control-sm">
-    <option value="<?php echo $mostrar['carrera']; ?>"> <?php echo $mostrar['carrera']; ?></option>
-      <?php
-        $consu = "SELECT * FROM carreras";
-        $ejecutarconsu= mysqli_query($conex, $consu);
-        while($consu2=mysqli_fetch_assoc($ejecutarconsu)){
-        ?>
-        <option value="<?php echo $consu2['id_carreras']; ?>"><?php echo $consu2['nombre']; ?></option>
-        <?php
-            }
-            ?>
+    <option value="<?php echo $mostrar['id_carreras']; ?>" selected> <?php echo $mostrar['nombre_carrera']; ?></option>
+    <?php
+                        $carreraElegida3 = $mostrar['id_carreras'];
+                        $consu3 = "SELECT * FROM carreras";
+                        $ejecutarconsu3 = mysqli_query($conex, $consu3);
+                        while ($consu3 = mysqli_fetch_assoc($ejecutarconsu3)) {
+                          $opcion3 = $consu3['id_carreras'];
+                          if($opcion3 != $carreraElegida3){
+                        ?>
+                          <option value="<?php echo $consu3['id_carreras']; ?>"><?php echo $consu3['nombre']; ?></option>
+                        <?php
+                        }
+                        }
+                        ?>
         </select>
         <br>
         </div>

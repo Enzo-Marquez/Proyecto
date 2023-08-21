@@ -65,25 +65,54 @@ $var= $_SESSION['user'];
 
 
     <nav class="navegacion">
-        <?php
-          if($cateUser == 0){
-          ?> 
-                               
-          <a class="navegacion__enlace" href="admin/propiedades/admin.php">Administrador</a>
-      
-        <?php
-         } 
-         ?> 
+    <?php
+                     if($cateUser == 0){
+                        ?> 
+                         
+                         <a class="navegacion__enlace" href="admin/propiedades/admincarreras.php">Administrador</a>
+
+                        <?php
+                     
+                      }
+                     ?> 
                 
                     <a class="navegacion__enlace" href="carreras.php">Mesas de Examenes</a>
                     <a class="navegacion__enlace navegacion__enlace--activo" href="informacion.php">Informacion</a>
                     <a class="navegacion__enlace" href="cerrarSession.php">Cerrar Sesión</a>
                 </nav> 
                 
+                
         <form class="asistencia" action="asistencia">
             <div clas="mb-3">
-            <p><a href="https://www.comercio.edu.ar/" target="_blank">Sitio Web Oficial institucion</a></p>
-        </form></div>
+            <h2 style="text-align: center;">Bienvenido a nuestro sitio web</h2>
+       
+        </form>
+    
+    
+        <div class="iframe-container">
+    <iframe src="https://www.comercio.edu.ar/examenesfinales/" frameborder="0" allowfullscreen></iframe>
+</div>
+    
+    
+    </div>
+
+        <style>
+.iframe-container {
+    height: 800px;
+}
+
+
+iframe {
+  
+  
+ 
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
+<div>
+
 </body>
 
 

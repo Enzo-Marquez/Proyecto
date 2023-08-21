@@ -79,7 +79,7 @@ h3 {
   margin-bottom: 0.2rem;
   background-color: var(--blanco);
   border-style: none;
-  border-radius: 2rem;
+  border-radius: none;
   
 }
 
@@ -161,7 +161,7 @@ h3 {
     font-size: 1.4rem;
     text-align: center;
     margin: 0 auto;
-    border-radius: 2rem;
+    border-radius: none;
 
 }
 
@@ -173,12 +173,12 @@ h3 {
     align-items: fit-content;
     padding: 4rem;
     margin: 0 auto;
-    border-radius: 2rem;  
+    border-radius: none;  
 }
 .carreras {
     display: block;
     margin: 0 auto;
-    border-radius: 2rem;
+    border-radius: none;
     
 }
 
@@ -190,7 +190,7 @@ h3 {
     align-items: fit-content;
     padding: 4rem;
     margin: 0 auto;
-    border-radius: 2rem;  
+    border-radius: none;  
 }
 
 .cuatri1 {
@@ -199,7 +199,7 @@ h3 {
     text-decoration: none; 
     text-transform: uppercase; 
     font-weight: bold; 
-    border-radius: .5rem; 
+    border-radius: none; 
     padding: 0.2rem;
     margin: 2%;
     border-radius: .5rem; 
@@ -258,7 +258,7 @@ h3 {
     text-align: center;
     
     margin: 0 auto;
-    border-radius: 2rem;
+    border-radius: none;
     font-size: 1rem;
     
     
@@ -384,7 +384,7 @@ h3 {
   width: 100%;
   border: none;
   padding: 0.7rem;
-  border-radius: 1rem;
+  border-radius: none;
 }
 .campo {
     margin-bottom: 1rem;

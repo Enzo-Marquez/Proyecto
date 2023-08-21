@@ -12,12 +12,18 @@ if($varsesion== null || $varsesion=''){
 
 $var= $_SESSION['user'];
    $conex = mysqli_connect("localhost","root","","proyecto_db");
-        $asd = $conex->query( "SELECT id, nombre from usuarios where username='$var'");
+        $asd = $conex->query( "SELECT id, nombre, fk_rol from usuarios where username='$var'");
         while($rowens = $asd->fetch_array()){ 
         //echo '<h1>'.$rowens['fk_rol'].'</h1>';
         $cateUser = $rowens['fk_rol'];
         //$sectorId = $rowens['id'];
              }
+
+             
+if($cateUser > 0){
+  header("location: ../../carreras.php");
+  die();
+}
 
 
              
@@ -55,6 +61,7 @@ $var= $_SESSION['user'];
 
 <?php
      include '../../includes/header.php';
+     
 
      
     ?>
@@ -134,6 +141,7 @@ $var= $_SESSION['user'];
       <th>Año en el cual regularizo la materia
         (Solo si es regular)
       </th>
+      <th>ELIMINAR</th>
       
       
 
@@ -155,7 +163,7 @@ if(isset($_POST['sexo'])){
 
   $carr = $_POST['carr'];
 
-  $sql="SELECT u.nombre AS nombre,apellido,username AS DNI,
+  $sql="SELECT id_inscripcion_alumno, u.nombre AS nombre,apellido,username AS DNI,
   condicion, anio_regular, llamado,celular,correo,
   anio, m.descrip_mat, c.nombre AS carrera
   FROM inscripcion_alumno ia
@@ -166,7 +174,7 @@ if(isset($_POST['sexo'])){
 
 }else{
 
-  $sql="SELECT u.nombre AS nombre,apellido,username AS DNI,
+  $sql="SELECT id_inscripcion_alumno, u.nombre AS nombre,apellido,username AS DNI,
   condicion, anio_regular, llamado,celular,correo,
   anio, m.descrip_mat, c.nombre AS carrera
   FROM inscripcion_alumno ia
@@ -181,12 +189,17 @@ if(isset($_POST['sexo'])){
 $result=mysqli_query($enlace,$sql);
 
 while($mostrar=mysqli_fetch_array($result)){
+  $botonEliinscripcion = 'eliminarIns'.$mostrar['id_inscripcion_alumno'];
+  $id_inscripcion_alumno = $mostrar['id_inscripcion_alumno'];
 ?>
+
+
 
 <tbody>
 <tr>
   
-  <td><?php echo $mostrar['carrera']?></td>
+<td><?php echo $mostrar['carrera']?></td>
+
   <td><?php echo $mostrar['descrip_mat']?></td>
   <td><?php echo $mostrar['anio']?></td>
   <td><?php echo $mostrar['llamado']?></td>
@@ -199,13 +212,20 @@ while($mostrar=mysqli_fetch_array($result)){
   <td><?php echo $mostrar['anio_regular']?></td>
   
   
- 
+  <td>
+              <!-- BOTON ELIMINAR -->
+
+              <form method="post">
+                <input type="submit" class="asign1" name="<?php echo $botonEliinscripcion; ?>" value="Eliminar">
+            </td>
+            </form>
   
   
  
 
 </tr>
 </tbody>
+
 
 
 
@@ -227,7 +247,7 @@ if(!$save){
 echo"Error en la linea sql";
 }
 }
-
+include('../../includes/eliminar_inscripcion.php');
 
 
 }

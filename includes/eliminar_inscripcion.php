@@ -1,19 +1,20 @@
 <?php
 
-if(isset($_POST[$botonElimusuario])) {
+if(isset($_POST[$botonEliinscripcion])) {
 
 
-$eliminarpersona= "DELETE from usuarios where id= '$id'";
-$ejecutareliminacionpersona = mysqli_query($conex,$eliminarpersona);
 
-if($ejecutareliminacionpersona){ ?>
+$eliminarinscripcion= "DELETE from inscripcion_alumno where id_inscripcion_alumno= '$id_inscripcion_alumno'";
+$ejecutareliminacioninscripto = mysqli_query($conex,$eliminarinscripcion);
+
+if($ejecutareliminacioninscripto){ ?>
     
     <script>
     var segu = 2;
     function borrarUser(){
 
             if(segu == 1){
-                    location.href="adminusuarios.php";
+                    location.href="admininscriptos.php";
             }else{
                     segu--;
                     setTimeout("borrarUser()",1000);
