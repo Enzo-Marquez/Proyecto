@@ -72,17 +72,83 @@ $var= $_SESSION['user'];
                         <?php
                       } 
                      ?> 
-                    <a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a>
+                    <!-- <a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a> -->
                     <a class="navegacion__enlace" href="admincarreras.php">Mesas de Examenes</a>
                     <a class="navegacion__enlace" href="admininscriptos.php">Inscriptos</a>
                     <a class="navegacion__enlace navegacion__enlace--activo" href="adminusuarios.php">Usuarios</a>
-                    <a class="navegacion__enlace" href="../../cerrarSession.php">Cerrar Sesión</a>
+                    <!-- Modal Salir -->
+ 
+    <a class="navegacion__salir"> </a> <button class="btn btn-primary" data-target=".bs-example-modal-sm" data-toggle="modal">Salir</button>
+
+    
+<div tabindex="-1" class="modal bs-example-modal-sm" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-header"><h4>Cerrar Sesion <i class="fa fa-lock"></i></h4></div>
+      <div class="modal-body"><i class="fa fa-question-circle"></i>¿Estás seguro que deseas Salir?</div>
+      <div class="modal-footer"><a class="btn btn-primary btn-block" href="../../cerrarSession.php">Salir</a></div>
+    </div>
+  </div>
+</div>
+</div>
                 </nav> 
 
 
-             <div class="asignatura">
+
+
+
+                
+<!-- Filtro De Busqueda -->
+
+<div class="asignatura">
+
                 
 
+<form  method="post">
+         
+  <select name="carr" class="form-control form-control-sm">
+    <option value="<?php echo $mostrar['carrera']; ?>">SELECCIONAR UNA CARRERA</option>
+      <?php
+        $consu = "SELECT * FROM carreras";
+        $ejecutarconsu= mysqli_query($conex, $consu);
+        while($consu2=mysqli_fetch_assoc($ejecutarconsu)){
+        ?>
+        <option value="<?php echo $consu2['id_carreras']; ?>"><?php echo $consu2['nombre']; ?></option>
+        <?php
+            }
+            ?>
+        </select>
+          <br>
+
+          <input type="submit" class="btn btn-primary" name="sexo" value="Buscar">
+
+          </form>
+          <br>
+
+
+
+
+
+</select>
+
+
+
+
+
+
+          
+<div> </div>
+
+
+
+
+
+
+
+          
 <!-- TABLA CON DATOS -->
 
 <table class="content-table-user">
@@ -153,7 +219,7 @@ while($mostrar=mysqli_fetch_array($result)){
 
   <!-- BOTON EDITAR -->
   <td><form method="post">
-  <button type="button" class="asign2 editbtn" data-toggle="modal" data-target="#editar<?php echo $mostrar['id']; ?>">
+  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $mostrar['id']; ?>">
   Modificar</td>
   </form>
 
@@ -163,7 +229,7 @@ while($mostrar=mysqli_fetch_array($result)){
   <!-- BOTON ELIMINAR -->
 <form method="post">
 
-        <input type="submit" class="asign1" name="<?php echo $botonElimusuario; ?>" value="Eliminar">
+        <input type="submit" class="btn btn-danger" name="<?php echo $botonElimusuario; ?>" value="Eliminar">
         <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
         </td>
 </form>
@@ -306,7 +372,7 @@ $botonEditusuarios = 'editar'. $mostrar['id'];
     <!-- BOTON DE MODIFICAR USUARIO -->
     
     <div>
-        <input type="submit" class="asign2" name="<?php echo $botonEditusuarios; ?>"  value="Modificar Usuario">
+        <input type="submit" class="btn btn-info" name="<?php echo $botonEditusuarios; ?>"  value="Modificar Usuario">
         <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
       </div>
       </form>
@@ -404,7 +470,7 @@ echo"Error en la linea sql";
 
 <!-- BOTON PARA CREAR EL USUARIO -->
 <br>
-<button class="asign1" type="button" data-toggle="modal" data-target="#agregarusuario">Crear Usuario</button>
+<button class="btn btn-success" type="button" data-toggle="modal" data-target="#agregarusuario">Crear Usuario</button>
 
 <!-- FIN DEL BOTON DE CREAR EL USUARIO-->
 
@@ -546,7 +612,7 @@ echo"Error en la linea sql";
         <!-- FIN SELECT DE ROL -->
 
         <div>
-        <input type="submit" class="asign1" name="registrar_usuario"  value="Agregar Usuario">
+        <input type="submit" class="btn btn-success" name="registrar_usuario"  value="Agregar Usuario">
         <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
 </div>
 

@@ -78,15 +78,30 @@ $var= $_SESSION['user'];
                 
                     <a class="navegacion__enlace" href="carreras.php">Mesas de Examenes</a>
                     <a class="navegacion__enlace navegacion__enlace--activo" href="informacion.php">Informacion</a>
-                    <a class="navegacion__enlace" href="cerrarSession.php">Cerrar Sesión</a>
+
+                       <!-- Modal Salir -->
+ 
+  <a class="navegacion__salir"> </a> <button class="btn btn-danger" data-target=".bs-example-modal-sm" data-toggle="modal">Salir</button>
+
+    
+<div tabindex="-1" class="modal bs-example-modal-sm" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-header"><h4>Cerrar Sesion <i class="fa fa-lock"></i></h4></div>
+      <div class="modal-body"><i class="fa fa-question-circle"></i>¿Estás seguro que deseas Salir?</div>
+      <div class="modal-footer"><a class="btn btn-primary btn-block" href="cerrarSession.php">Salir</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
                 </nav> 
                 
                 
-        <form class="asistencia" action="asistencia">
-            <div clas="mb-3">
-            <h2 style="text-align: center;">Bienvenido a nuestro sitio web</h2>
-       
-        </form>
+
     
     
         <div class="iframe-container">

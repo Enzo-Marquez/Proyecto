@@ -32,7 +32,7 @@ if(isset($_POST[$botonEditusuarios])){
                 if($ejecutaredicionUser){ ?>
     
                     <script>
-                    var seg2 = 10;
+                    var seg2 = 3;
                     function editar(){
                 
                             if(seg2 == 0){

@@ -9,7 +9,7 @@ if($ejecutareliminacion){
         ?>
     
     <script>
-    var seg = 1;
+    var seg = 3;
     function borrar(){
 
             if(seg == 0){

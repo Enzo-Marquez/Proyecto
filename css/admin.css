@@ -96,23 +96,28 @@ h3 {
 
 
 .navegacion {
-    display: block;
+    display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    align-items: center;
     background-color: var(--secundario);
     padding: 1rem;
     text-align: center;
     margin: 0 auto;
     border-radius: none;
-    text-decoration: none;
-   
-}
-@media (min-width: 768px) {
+  }
+  
+  @media (min-width: 768px) {
     .navegacion {
-        flex-direction: row;
+      flex-direction: row;
     }
-}
-.esc {
+  }
+  
+  .navegacion__enlace {
+    /* Estilos para los enlaces de navegación */
+    margin: 0 10px; /* Ajustar el espacio horizontal entre los enlaces */
+  }
+  
+  .esc {
     display: block;
     justify-content: left;
     padding-left: 2%;
@@ -121,17 +126,21 @@ h3 {
     font-family: var(--fuentePrincipal);
     font-size: 1.5rem;
     color: #000000;
-
-    /* BORDE */
-   /*  -webkit-text-stroke: 2px rgb(200, 12, 12);
-  color: #921313;*/
-}
-
-@media (min-width: 540px) {
+  }
+  
+  @media (min-width: 540px) {
     .esc {
-        font-size: 2rem;
+      font-size: 2rem;
     }
-}
+  }
+  
+  /* Alinear "Salir" a la derecha */
+  .navegacion__salir {
+    display: flex;
+    align-items: center;
+  }
+  
+
 
 
 

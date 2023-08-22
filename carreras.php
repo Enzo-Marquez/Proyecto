@@ -78,7 +78,24 @@ $var= $_SESSION['user'];
                     
   <a class="navegacion__enlace navegacion__enlace--activo" href="carreras.php">Mesas de Examenes</a>
   <a class="navegacion__enlace" href="informacion.php">Informacion</a>
-  <a class="navegacion__enlace" href="cerrarSession.php">Cerrar Sesión</a>
+  <!-- Modal Salir -->
+ 
+  <a class="navegacion__salir"> </a> <button class="btn btn-danger" data-target=".bs-example-modal-sm" data-toggle="modal">Salir</button>
+
+    
+<div tabindex="-1" class="modal bs-example-modal-sm" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-header"><h4>Cerrar Sesion <i class="fa fa-lock"></i></h4></div>
+      <div class="modal-body"><i class="fa fa-question-circle"></i>¿Estás seguro que deseas Salir?</div>
+      <div class="modal-footer"><a class="btn btn-primary btn-block" href="cerrarSession.php">Salir</a></div>
+    </div>
+  </div>
+</div>
+</div>
   </nav> 
 
   <div class="carrera">
@@ -191,7 +208,7 @@ $var= $_SESSION['user'];
         }
 
         #toggleButton:hover {
-            background-color: #45a049;
+            background-color: #45a029;
         }
     </style>
 </head>
@@ -266,7 +283,7 @@ $var= $_SESSION['user'];
     ?>
 
       <!-- BOTON -->
-      <button type="button" class="cuatri1" data-toggle="modal" data-target="#ventana<?php
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ventana<?php
       echo $mostrar['idExamen'];
       ?>">
         Inscribirse
@@ -323,18 +340,19 @@ $var= $_SESSION['user'];
 
         <div>
           <br>
-        <label align="left" >Año En el Cual Usted Regularizo la Asignatura</label><p style="color: red;">(Opcional) Si Usted No es Regular No Seleccione Año</p>
+        <label align="left" >Año En el Cual Usted Regularizo la Asignatura</label><p style="color: red;">¡Si Usted No es Regular Seleccione Alumno Libre!</p>
         <select class="form-control form-control-sm" name="anio_regular"  placeholder="Sino es Regular Deje el Campo en blanco">
-        <option selected="true" disabled="disabled">SELECCIONAR AÑO</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
+        <option selected="true" disabled="disabled">Seleccione Condicion</option>
+        <option value="Alumno Libre">Alumno Libre</option>
+        <option value="2015">2015 (Alumno Regular)</option>
+        <option value="2016">2016 (Alumno Regular)</option>
+        <option value="2017">2017 (Alumno Regular)</option>
+        <option value="2018">2018 (Alumno Regular)</option>
+        <option value="2019">2019 (Alumno Regular)</option>
+        <option value="2020">2020 (Alumno Regular)</option>
+        <option value="2021">2021 (Alumno Regular)</option>
+        <option value="2022">2022 (Alumno Regular)</option>
+        <option value="2023">2023 (Alumno Regular)</option>
         </div>
         </select>
         <br>
@@ -357,8 +375,9 @@ $var= $_SESSION['user'];
       
 
 <div>
+<br>
 
-<input type="submit" class="asign1" name="<?php echo $btnsend; ?>"  value="Enviar Inscripcion">
+<input type="submit" class="btn btn-success" name="<?php echo $btnsend; ?>"  value="Enviar Inscripcion">
 </div>
 
 

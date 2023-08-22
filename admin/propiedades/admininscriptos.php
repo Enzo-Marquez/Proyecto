@@ -75,15 +75,32 @@ if($cateUser > 0){
                         <?php
                       } 
                      ?> 
-                    <a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a>
+                    <!--<a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a>-->
                     <a class="navegacion__enlace" href="admincarreras.php">Mesas de Examenes</a>
                     <a class="navegacion__enlace navegacion__enlace--activo" href="admininscriptos.php">Incriptos</a>
                     <a class="navegacion__enlace" href="adminusuarios.php">Usuarios</a>
-                    <a class="navegacion__enlace" href="../../cerrarSession.php">Cerrar Sesión</a>
+                    <!-- Modal Salir -->
+ 
+    <a class="navegacion__salir"> </a> <button class="btn btn-primary" data-target=".bs-example-modal-sm" data-toggle="modal">Salir</button>
+
+    
+<div tabindex="-1" class="modal bs-example-modal-sm" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-header"><h4>Cerrar Sesion <i class="fa fa-lock"></i></h4></div>
+      <div class="modal-body"><i class="fa fa-question-circle"></i>¿Estás seguro que deseas Salir?</div>
+      <div class="modal-footer"><a class="btn btn-primary btn-block" href="../../cerrarSession.php">Salir</a></div>
+    </div>
+  </div>
+</div>
+</div>
                 </nav> 
 
 
-             <div class="asignatura">
+<div class="asignatura">
 
                 
 
@@ -104,7 +121,7 @@ if($cateUser > 0){
         </select>
           <br>
 
-          <input type="submit" class="asign1" name="sexo" value="Buscar">
+          <input type="submit" class="btn btn-primary" name="sexo" value="Buscar">
 
           </form>
 
@@ -216,7 +233,7 @@ while($mostrar=mysqli_fetch_array($result)){
               <!-- BOTON ELIMINAR -->
 
               <form method="post">
-                <input type="submit" class="asign1" name="<?php echo $botonEliinscripcion; ?>" value="Eliminar">
+                <input type="submit" class="btn btn-danger" name="<?php echo $botonEliinscripcion; ?>" value="Eliminar">
             </td>
             </form>
   

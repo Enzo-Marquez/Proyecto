@@ -102,9 +102,7 @@
                     
                 </div>
             </div>
-            <p>
-            Si no tienes clave personal o te la olvidaste, haz clic en: 'Obtener Clave Personal', y te será enviada a tu casilla de correo electrónico. Ten en cuenta que esto lo corrobora el personal de regencia y puede demorar cierto tiempo, así que no olvides tu clave.</p>
-            <p>
+
 
 
 

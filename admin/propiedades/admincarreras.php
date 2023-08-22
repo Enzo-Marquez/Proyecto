@@ -59,6 +59,7 @@ if($cateUser > 0){
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.js"></script>
 
+  <link rel="stylesheet" href="ruta/a/font-awesome.min.css">
 
 
 </head>
@@ -72,14 +73,33 @@ if($cateUser > 0){
 
 
   ?>
-  <nav class="navegacion">
+<nav class="navegacion">
+
+  <!--<a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a> -->
+  <a class="navegacion__enlace navegacion__enlace--activo" href="admincarreras.php">Mesas de Examenes</a>
+  <a class="navegacion__enlace" href="admininscriptos.php">Inscriptos</a>
+  <a class="navegacion__enlace" href="adminusuarios.php">Usuarios</a>
   
-    <a class="navegacion__enlace" href="../../carreras.php">Vista de Alumnos</a>
-    <a class="navegacion__enlace navegacion__enlace--activo" href="admincarreras.php">Mesas de Examenes</a>
-    <a class="navegacion__enlace" href="admininscriptos.php">Inscriptos</a>
-    <a class="navegacion__enlace" href="adminusuarios.php">Usuarios</a>
-    <a class="navegacion__enlace" href="../../cerrarSession.php">Cerrar Sesión</a>
-  </nav>
+    <!-- Modal Salir -->
+ 
+    <a class="navegacion__salir"> </a> <button class="btn btn-primary" data-target=".bs-example-modal-sm" data-toggle="modal">Salir</button>
+
+    
+    <div tabindex="-1" class="modal bs-example-modal-sm" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="modal-header"><h4>Cerrar Sesion <i class="fa fa-lock"></i></h4></div>
+          <div class="modal-body"><i class="fa fa-question-circle"></i>¿Estás seguro que deseas Salir?</div>
+          <div class="modal-footer"><a class="btn btn-primary btn-block" href="../../cerrarSession.php">Salir</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 
 
   <div class="asignatura">
@@ -104,7 +124,7 @@ if($cateUser > 0){
       </select>
       <br>
 
-      <input type="submit" class="asign1" name="sexo" value="Buscar">
+      <input type="submit" class="btn btn-primary" name="sexo" value="Buscar">
 
     </form>
 
@@ -114,14 +134,14 @@ if($cateUser > 0){
 
         <tr>
 
-          <th>carrera</th>
-          <th>año</th>
-          <th>espacio curricular</th>
-          <th>primer llamado</th>
-          <th>segundo llamado</th>
-          <th>hora</th>
-          <th>presidente</th>
-          <th>vocal 1</th>
+          <th>Carrera</th>
+          <th>Año</th>
+          <th>Espacio Curricular</th>
+          <th>Primer Llamado</th>
+          <th>Segundo Llamado</th>
+          <th>Hora</th>
+          <th>Presidente</th>
+          <th>Vocal 1</th>
           <th>Vocal 2</th>
           <th>Editar Mesa</th>
           <th>Eliminar Mesa</th>
@@ -182,7 +202,7 @@ LEFT JOIN anios ON id_anios = anio";
               <!-- BOTON EDITAR -->
               <form method="post">
 
-                <button type="button" class="asign2 editbtn" data-toggle="modal" data-target="#editar<?php echo $mostrar['id_examenes']; ?>">
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $mostrar['id_examenes']; ?>">
                   Modificar
                   <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
             </td>
@@ -193,7 +213,7 @@ LEFT JOIN anios ON id_anios = anio";
               <!-- BOTON ELIMINAR -->
 
               <form method="post">
-                <input type="submit" class="asign1" name="<?php echo $botonElim; ?>" value="Eliminar">
+                <input type="submit" class="btn btn-danger" name="<?php echo $botonElim; ?>" value="Eliminar">
                 <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
             </td>
             </form>
@@ -357,11 +377,11 @@ LEFT JOIN anios ON id_anios = anio";
                         <label align="left">Segundo Vocal</label>
                         <input class="form-control form-control-sm" id="vocal_2" name="vocal_2a" type="text" placeholder="Vocales" value="<?php echo $mostrar['vocal_2']; ?>" required>
                       </div>
-
+                          <br>
                   </div> <!--.contenedor-campos-->
 
                   <div>
-                    <input type="submit" class="asign2" name="<?php echo $botonEdit; ?>" value="Modificar la Mesa">
+                    <input type="submit" class="btn btn-info" name="<?php echo $botonEdit; ?>" value="Modificar la Mesa">
                     <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
                   </div>
 
@@ -475,7 +495,7 @@ LEFT JOIN anios ON id_anios = anio";
 
 <!-- BOTON PARA CREAR LA MESA DE EXAMEN -->
 <br>
-<button class="asign1" type="button" data-toggle="modal" data-target="#agregarcarrera"> Crear Mesa</button>
+<button class="btn btn-success" type="button" data-toggle="modal" data-target="#agregarcarrera"> Crear Mesa</button>
 
 <!-- FIN DEL BOTON DE CREAR LA MESA DE EXAMEN -->
 
@@ -621,9 +641,9 @@ LEFT JOIN anios ON id_anios = anio";
               </div>
 
             </div>
-
+                <br>
             <div>
-              <input type="submit" class="asign1" name="registrarse" value="Agregar Mesa de Examen">
+              <input type="submit" class="btn btn-success" name="registrarse" value="Agregar Mesa de Examen">
               <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
             </div>
 

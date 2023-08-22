@@ -38,7 +38,7 @@ if(isset($_POST[$botonEdit])){
                 if($ejecutaredicion){ ?>
     
                     <script>
-                    var seg2 = 10;
+                    var seg2 = 1;
                     function editar(){
                 
                             if(seg2 == 0){
