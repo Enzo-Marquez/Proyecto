@@ -17,6 +17,21 @@
 CREATE DATABASE IF NOT EXISTS `proyecto_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `proyecto_db`;
 
+-- Volcando estructura para tabla proyecto_db.anios
+CREATE TABLE IF NOT EXISTS `anios` (
+  `id_anios` int(11) NOT NULL AUTO_INCREMENT,
+  `desc_anios` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_anios`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla proyecto_db.anios: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `anios` DISABLE KEYS */;
+INSERT INTO `anios` (`id_anios`, `desc_anios`) VALUES
+	(1, 'Primero'),
+	(2, 'Segundo'),
+	(3, 'Tercero');
+/*!40000 ALTER TABLE `anios` ENABLE KEYS */;
+
 -- Volcando estructura para tabla proyecto_db.carreras
 CREATE TABLE IF NOT EXISTS `carreras` (
   `id_carreras` int(11) NOT NULL AUTO_INCREMENT,
@@ -46,14 +61,12 @@ CREATE TABLE IF NOT EXISTS `examenes` (
   `vocal_1` varchar(50) NOT NULL DEFAULT '',
   `vocal_2` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_examenes`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyecto_db.examenes: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_db.examenes: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `examenes` DISABLE KEYS */;
 INSERT INTO `examenes` (`id_examenes`, `carrera`, `anio`, `espacio_curricular`, `llamado_1`, `llamado_2`, `hora`, `presidente`, `vocal_1`, `vocal_2`) VALUES
-	(110, 2, 2, 27, '2023-05-16', '2023-05-11', '18:17:00', 'asddas', 'asdasd', 'asddas'),
-	(115, 2, 2, 28, '2023-05-17', '2023-05-17', '20:58:00', 'asd', 'asdasd', 'asdasd'),
-	(116, 1, 2, 14, '2023-05-16', '2023-05-15', '21:09:00', 'asddas', 'rewe', 'adsdas');
+	(133, 2, 3, 0, '2023-08-10', '2023-08-22', '18:00:00', 'Moschen Silvio', 'Fontana Claudia', 'Roelschin Sebastian');
 /*!40000 ALTER TABLE `examenes` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto_db.inscripcion_alumno
@@ -62,15 +75,13 @@ CREATE TABLE IF NOT EXISTS `inscripcion_alumno` (
   `id_alumno` int(11) NOT NULL,
   `id_examen` int(11) NOT NULL,
   `condicion` varchar(50) NOT NULL DEFAULT '0',
-  `anio_regular` year(4) NOT NULL DEFAULT 2000,
+  `anio_regular` varchar(50) NOT NULL DEFAULT '2000',
   `llamado` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_inscripcion_alumno`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla proyecto_db.inscripcion_alumno: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `inscripcion_alumno` DISABLE KEYS */;
-INSERT INTO `inscripcion_alumno` (`id_inscripcion_alumno`, `id_alumno`, `id_examen`, `condicion`, `anio_regular`, `llamado`) VALUES
-	(124, 41, 116, 'Alumno Regular', '2021', 'Ambos Llamados');
 /*!40000 ALTER TABLE `inscripcion_alumno` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto_db.inscriptos
@@ -213,6 +224,20 @@ INSERT INTO `mat` (`id_mat`, `descrip_mat`, `anio_mat`, `carrera_mat`) VALUES
 	(115, 'Practicas profesionalizantes II', 3, 4);
 /*!40000 ALTER TABLE `mat` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyecto_db.roles
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id_roles` int(11) NOT NULL AUTO_INCREMENT,
+  `desc_roles` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_roles`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla proyecto_db.roles: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` (`id_roles`, `desc_roles`) VALUES
+	(0, 'Administrador'),
+	(1, 'Alumno');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+
 -- Volcando estructura para tabla proyecto_db.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -225,15 +250,13 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `celular` varchar(10) DEFAULT NULL,
   `correo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyecto_db.usuarios: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_db.usuarios: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `username`, `pass`, `nombre`, `apellido`, `fk_rol`, `carrera`, `celular`, `correo`) VALUES
-	(41, '41403362', '123', 'Enzo', 'Marquez', 0, 1, '3482647506', 'enzomarquez42@gmail.com'),
-	(44, '41225399', '123', 'Leandro', 'Salaz', 1, 2, '3482554488', 'leandrosalaz@gmail.com'),
-	(45, '42927992', '123', 'Javier', 'Raffin', 0, 1, '3482445566', 'esc.javierraffin@gmail.com'),
-	(46, '123123', '123', 'fff', 'awdas', 1, 2, '3482123213', 'asdasdas@gmail.com');
+	(0, '41403362', '123', 'Enzo', 'Marquez', 0, 1, '3482647506', 'enzomarquez42@gmail.com'),
+	(52, '123', '123', 'alsdaasd', 'asdsadasd', 1, 2, '123', '123@gmail.com');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

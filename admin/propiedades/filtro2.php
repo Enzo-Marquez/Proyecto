@@ -21,7 +21,7 @@ $result00 = mysqli_query($conex, $sql3);
 ?>
 
 <section style="text-align: center;">
-	<select id="controlBuscador4<?php echo $id_examen; ?>" class="form-control form-control-sm" name="espacio_curricular">
+	<select id="controlBuscador4<?php echo $id_examen; ?>" class="form-control form-control-sm" name="espacio_curriculara">
 
 		<?php
 		while ($ver3 = mysqli_fetch_row($result00)) {

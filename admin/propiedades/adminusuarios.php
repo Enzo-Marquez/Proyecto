@@ -182,14 +182,23 @@ $enlace = mysqli_connect($servidor,$usuario,$clave,$baseDeDatos);
 
 
 
+if(isset($_POST['sexo'])){
 
+  $carr = $_POST['carr'];
 
+  $sql="SELECT u.id, u.username, u.pass, u.nombre, u.apellido, u.fk_rol,id_roles,desc_roles,id_carreras,
+c.nombre AS nombre_carrera, u.celular, u.correo
+FROM usuarios u
+LEFT JOIN roles on id_roles = u.fk_rol
+LEFT JOIN carreras c ON c.id_carreras = u.carrera where u.carrera = $carr;";
 
+}else{
 $sql="SELECT u.id, u.username, u.pass, u.nombre, u.apellido, u.fk_rol,id_roles,desc_roles,id_carreras,
 c.nombre AS nombre_carrera, u.celular, u.correo
 FROM usuarios u
 LEFT JOIN roles on id_roles = u.fk_rol
 LEFT JOIN carreras c ON c.id_carreras = u.carrera;";
+}
 $result=mysqli_query($enlace,$sql);
 
 while($mostrar=mysqli_fetch_array($result)){

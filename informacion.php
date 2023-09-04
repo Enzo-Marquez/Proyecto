@@ -81,10 +81,9 @@ $var= $_SESSION['user'];
 
                        <!-- Modal Salir -->
  
-  <a class="navegacion__salir"> </a> <button class="btn btn-danger" data-target=".bs-example-modal-sm" data-toggle="modal">Salir</button>
+  <a class="navegacion__salir"> </a> <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#conchajugosa">Salir</button>
 
-    
-<div tabindex="-1" class="modal bs-example-modal-sm" role="dialog" aria-hidden="true">
+  <div tabindex="-1" class="modal bs-example-modal-sm" id="conchajugosa" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
