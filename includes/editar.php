@@ -1,7 +1,8 @@
 <?php
+$conex = mysqli_connect("localhost", "root", "", "proyecto_db");
 
-
-if(isset($_POST[$botonEdit])){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $idExamen = $_POST['idExamen'];
         $carrera = $_POST["carreraa"];
         $anio = $_POST["anioa"];
         $espacio_curricular = $_POST["espacio_curriculara"];
@@ -11,51 +12,29 @@ if(isset($_POST[$botonEdit])){
         $presidente = $_POST["presidentea"];
         $vocal_1 = $_POST["vocal_1a"];
         $vocal_2 = $_POST["vocal_2a"];
-        if($carrera == 0){
-            ?>
-            <script>alert("Debe Seleccionar Una Carrera");</script>
-            <?php
-    
-        }
 
-
-
-        else {
+       
                 $editarDatos = "UPDATE examenes SET 
-                carrera = '$carrera',
-                anio = '$anio',
-                espacio_curricular = '$espacio_curricular',
-                llamado_1 = '$llamado_1',
-                llamado_2 = '$llamado_2',
-                hora = '$hora',
-                presidente ='$presidente',
-                vocal_1 = '$vocal_1',
-                vocal_2 = '$vocal_2' 
-                WHERE id_examenes = '$editarA'";
+                 carrera = '$carrera',
+                 anio = '$anio',
+                 espacio_curricular = '$espacio_curricular',
+                 llamado_1 = '$llamado_1',
+                 llamado_2 = '$llamado_2',
+                 hora = '$hora',
+                 presidente ='$presidente',
+                 vocal_1 = '$vocal_1',
+                 vocal_2 = '$vocal_2' 
+                 WHERE id_examenes = '$idExamen'";
                 
-                $ejecutaredicion = mysqli_query($conex, $editarDatos);
+                 $ejecutaredicion = mysqli_query($conex, $editarDatos);
             
-                if($ejecutaredicion){ ?>
-    
-                    <script>
-                    var seg2 = 1;
-                    function editar(){
-                
-                            if(seg2 == 0){
-                                    location.href="admincarreras.php";
-                            }else{
-                                    seg2--;
-                                    setTimeout("editar()",1000);
-                            }
-                
+                 if ($ejecutaredicion) {
+                        header("refresh:2;url=../admin/propiedades/admincarreras.php");
+                    } else {
+                        echo "Error en la consulta: " . mysqli_error($conex);
                     }
+                    
                 
-                    </script>
-                <div>
-                <img src="../../includes/wait2.gif" onload="editar()" width="200px" height="500px">
-                </div> 
-                <?php
-                }
             }
-            }
+            
             ?>

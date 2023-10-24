@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-error_reporting(0);
+//error_reporting(0);
 $varsesion = $_SESSION['user'];
 if ($varsesion == null || $varsesion == '') {
   header("location: ../../index.php");
@@ -157,7 +157,7 @@ if($cateUser > 0){
 
           $carr = $_POST['carr'];
 
-          $sql = "SELECT e.id_examenes,c.id_carreras, c.nombre as carrera, anio, desc_anios, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
+          $sql = "SELECT e.id_examenes,c.id_carreras, c.nombre as carrera, anio,espacio_curricular, desc_anios, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
 llamado_1 as llamado1, llamado_2 as llamado2,
 DATE_FORMAT( llamado_2 ,  '%d-%m-%Y' ) AS llamado_2, hora, presidente, vocal_1, vocal_2
 from examenes e 
@@ -167,7 +167,7 @@ LEFT JOIN anios ON id_anios = anio
 where carrera = '$carr' ";
         } else {
 
-          $sql = "SELECT e.id_examenes,c.id_carreras, c.nombre as carrera, anio, desc_anios, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
+          $sql = "SELECT e.id_examenes,c.id_carreras, c.nombre as carrera,espacio_curricular, anio, desc_anios, m.descrip_mat, DATE_FORMAT( llamado_1 ,  '%d-%m-%Y' ) AS llamado_1,
 llamado_1 as llamado1, llamado_2 as llamado2,
 DATE_FORMAT( llamado_2 ,  '%d-%m-%Y' ) AS llamado_2, hora, presidente, vocal_1, vocal_2
 from examenes e
@@ -237,6 +237,7 @@ LEFT JOIN anios ON id_anios = anio";
                   <?php
 
                   $editarA = $mostrar['id_examenes'];
+                  $esp = $mostrar['espacio_curricular'];
 
                   //$consEditA = "SELECT * FROM examenes where id = '$editarA'";
 
@@ -250,9 +251,10 @@ LEFT JOIN anios ON id_anios = anio";
 
                   ?>
                   <div>
-                    <form method="post">
+                    <form action="../../includes/editar.php" method="POST">
+                      <?php echo $editarA; ?>
                       <p>Seleccionar Carrera</p>
-                      <input style="display:none;" id="idExamena" name="idExamen" type="text" value="<?php echo $mostrar['id_examenes'] ?>">
+                      <input style="display:none" id="idExamena" name="idExamen" type="text" value="<?php echo $mostrar['id_examenes'] ?>">
                       <select id="carreraas" name="carreraa" class="form-control form-control-sm">
                         <option value="<?php echo $mostrar['id_carreras']; ?>" selected><?php echo $mostrar['carrera']; ?></option>
                         
@@ -300,15 +302,16 @@ LEFT JOIN anios ON id_anios = anio";
                         </select>
                       </div>
                       <br>
+                      
 
                       <div>
 
                          <script type="text/javascript">
                           $(document).ready(function() {
-                            $('#carreraas').val();
+                            $('#carreraa').val();
                             recargarLista2();
 
-                            $('#carreraas').change(function() {
+                            $('#carreraa').change(function() {
                               recargarLista2();
                             });
                           })
@@ -321,17 +324,33 @@ LEFT JOIN anios ON id_anios = anio";
                               recargarLista2();
                             });
                           })
+
                         </script>
+
+<script>
+  // Obtén una referencia al select y al input text
+  var select = document.querySelector('select[name="espacio_curriculara"]');
+  var inputText = document.getElementById("inputTextResultado");
+
+  // Agrega un evento onchange al select
+  select.addEventListener("change", function () {
+    // Cuando el valor del select cambia, actualiza el valor del input text
+    inputText.value = select.value;
+  });
+</script>
+
 
                         <script type="text/javascript">
                           function recargarLista2() {
                             $.ajax({
                               type: "POST",
                               url: "filtro2.php",
-                              data: "carreraa=" + $('#carreraas').val() + "&anioa=" + $('#anioa').val() + "&idExamena=" + $('#idExamena').val(),
+                              data: "carreraa=" + $('#carreraas').val() + "&anioa=" + $('#anioa').val() + "&idExamena=",
                               
                               success: function(g) {
-                                $('#select3lista').html(g);
+                               var select = $('#controlBuscador4<?php echo $editarA; ?>');
+                                select.html(g);
+                               
                               }
                             });
                           }
@@ -339,11 +358,13 @@ LEFT JOIN anios ON id_anios = anio";
 
 
 
-
-
                         <label>Espacio Curricular</label>
-                        <div id="select3lista"></div>
-
+                        <section style="text-align: center;">
+                            <select id="controlBuscador4<?php echo $editarA; ?>" class="form-control form-control-sm" name="espacio_curriculara">
+                            <option value="<?php echo $esp?>" selected><?php echo $mostrar["descrip_mat"];?></option>
+                            
+                            </select>
+                        </section>
 
 
                       </div>
@@ -450,9 +471,10 @@ LEFT JOIN anios ON id_anios = anio";
         </div>
         <div class="modal-footer">
           <form method="post">
-            <input class="btn btn-primary" value="Aceptar" type="submit" name="guardar<?php
-                                                                                      echo $mostrar['id_examenes'];
-                                                                                      ?>">
+            <input class="btn btn-primary" value="Aceptar" type="submit" name="guardar
+            <?php
+            echo $mostrar['id_examenes'];
+            ?>">
           </form>
         </div>
       </div>
@@ -647,12 +669,7 @@ LEFT JOIN anios ON id_anios = anio";
               <!-- <a href="../../carreras.php"> <button class="asign1">Volver</button></a> -->
             </div>
 
-            <?php
-            $consulta = "SELECT * FROM examenes";
-            $ejecutarConsulta = mysqli_query($enlace, $consulta);
-            $verFilas = mysqli_num_rows($ejecutarConsulta);
-            $fila = mysqli_fetch_array($ejecutarConsulta);
-            ?>
+            
       </div>
       </fieldset>
       </form>
